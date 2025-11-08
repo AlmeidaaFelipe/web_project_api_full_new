@@ -5,10 +5,15 @@ WORKDIR /app
 
 # Copiar package files
 COPY package*.json ./
-RUN npm ci
+
+# Usar npm install se não tiver package-lock.json
+# Ou npm ci se tiver package-lock.json (mais rápido)
+RUN npm install
 
 # Copiar código e fazer build
 COPY . .
+
+# Build da aplicação
 RUN npm run build
 
 # Production stage - Nginx para servir os arquivos
