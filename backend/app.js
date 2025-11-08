@@ -35,11 +35,13 @@ app.use(express.json());
 app.use(helmet());
 app.set('trust proxy', 1);
 const corsOptions = {
-  origin: [
-    'https://www.luizhondo.com',
-    'https://luizhondo.com',
-    'http://localhost:3000',
-  ],
+  origin: process.env.ALLOWED_ORIGINS 
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : [
+        'https://www.luizhondo.com',
+        'https://luizhondo.com',
+        'http://localhost:3000',
+      ],
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
