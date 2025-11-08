@@ -75,9 +75,15 @@ class Api {
   }
 }
 
-// Prefer env var; fallback to '/api' for production behind Nginx
+// Detecta ambiente
+const isDevelopment = import.meta.env.DEV;
+
+// Em desenvolvimento: usa /api (proxy do Vite)
+// Em produção: usa VITE_API_BASE_URL ou fallback para API direta
 const api = new Api({
-  baseUrl: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseUrl: isDevelopment 
+    ? '/api' 
+    : (import.meta.env.VITE_API_BASE_URL || 'https://api-luizhondo.appfyzor.com'),
 });
 
 export default api;
