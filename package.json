@@ -1,0 +1,28 @@
+{
+  "name": "my-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n front,back -c auto \"npm:dev -w frontend\" \"npm:dev -w backend\"",
+    "dev:front": "npm run dev -w frontend",
+    "dev:back": "npm run dev -w backend",
+    "build": "npm run build -w frontend",
+    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "start": "concurrently -n front,back -c auto \"npm:dev -w frontend\" \"npm:start -w backend\"",
+    "test": "npm run test -w backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "jest": "^30.2.0"
+  },
+  "dependencies": {
+    "celebrate": "^15.0.3",
+    "cors": "^2.8.5",
+    "express-winston": "^4.2.0",
+    "winston": "^3.18.3"
+  }
+}

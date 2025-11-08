@@ -1,0 +1,6 @@
+node_modules
+.eslintrc
+node_modules
+.editorconfig
+.vscode
+.env
